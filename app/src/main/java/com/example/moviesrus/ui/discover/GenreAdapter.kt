@@ -1,11 +1,15 @@
 package com.example.moviesrus.ui.discover
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.moviesrus.databinding.ListItemGenreBinding
 import com.example.moviesrus.domain.models.Genre
+import com.example.moviesrus.util.GENRE_IMAGE_URL
+import com.squareup.picasso.Picasso
 
 class GenreAdapter(
     private val genres: List<Genre>,
@@ -15,6 +19,7 @@ class GenreAdapter(
     inner class GenreViewHolder(private val binding: ListItemGenreBinding): ViewHolder(binding.root) {
         fun bind(genre: Genre) {
             binding.textviewGenre.text = genre.name
+            Picasso.get().load(GENRE_IMAGE_URL).into(binding.genreIcon)
             itemView.setOnClickListener {
                 clickListener(genre)
             }

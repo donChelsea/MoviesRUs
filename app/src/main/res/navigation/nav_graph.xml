@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/discoverFragment"
         android:name="com.example.moviesrus.ui.discover.DiscoverFragment"
-        android:label="fragment_discover"
-        tools:layout="@layout/fragment_discover" />
+        android:label="@string/discover"
+        tools:layout="@layout/fragment_discover">
+        <action
+            android:id="@+id/action_discoverFragment_to_discoveredListFragment"
+            app:destination="@id/discoveredListFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/discoveredListFragment"
+        android:name="com.example.moviesrus.ui.discover.discovered_list.DiscoveredListFragment"
+        android:label="fragment_discovered_list"
+        tools:layout="@layout/fragment_discovered_list">
+        <argument
+            android:name="genre"
+            app:argType="com.example.moviesrus.domain.models.Genre" />
+    </fragment>
 </navigation>
