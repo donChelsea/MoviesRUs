@@ -9,5 +9,7 @@ interface MovieRepository {
 
     suspend fun getGenres(): Flow<Resource<List<Genre>>>
 
-    suspend fun getMoviesByGenre(genreId: String): Flow<Resource<List<Movie>>>
+    suspend fun getMoviesByGenre(genreId: Int): Flow<Resource<List<Movie>>>
+
+    suspend fun searchMovie(query: String): Flow<Resource<List<Movie>>>
 }

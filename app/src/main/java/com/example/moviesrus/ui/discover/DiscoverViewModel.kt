@@ -30,7 +30,7 @@ class DiscoverViewModel @Inject constructor(
                         }
                     }
                     is Resource.Error -> {
-                        Log.d("SearchViewModel: Error: ", result.message.toString())
+                        Log.d("DiscoverViewModel: Error: ", result.message.toString())
                     }
                     is Resource.Loading -> {
                         _genres.value = _genres.value.copy(isLoading = true)

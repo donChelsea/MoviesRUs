@@ -30,10 +30,21 @@ class MovieRepositoryImpl @Inject constructor(
         emit(Resource.Error(message = e.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMoviesByGenre(genreId: String): Flow<Resource<List<Movie>>> = flow {
+    override suspend fun getMoviesByGenre(genreId: Int): Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading(isLoading = true))
 
         val genres = api.getMoviesByGenre(genreId = genreId).results
+        with(genres) {
+            emit(Resource.Success(data = this.map { it.toDomain() }))
+        }
+    }.catch { e ->
+        emit(Resource.Error(message = e.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun searchMovie(query: String): Flow<Resource<List<Movie>>> = flow {
+        emit(Resource.Loading(isLoading = true))
+
+        val genres = api.searchMovie(query = query).results
         with(genres) {
             emit(Resource.Success(data = this.map { it.toDomain() }))
         }

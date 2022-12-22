@@ -20,9 +20,17 @@ interface MovieApi {
 
     @GET("discover/movie")
     suspend fun getMoviesByGenre(
-        @Query("with_genres") genreId: String,
+        @Query("with_genres") genreId: Int,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = API_LANGUAGE,
         @Query("sort_by") sortBy: String = API_SORT_BY_POPULARITY_DESC,
     ): ListResultDto<MovieDto>
+
+    @GET("search/movie")
+    suspend fun searchMovie(
+        @Query("query") query: String,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = API_LANGUAGE,
+    ): ListResultDto<MovieDto>
+
 }

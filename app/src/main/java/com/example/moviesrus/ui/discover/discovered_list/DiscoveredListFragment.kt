@@ -14,7 +14,6 @@ import com.example.moviesrus.databinding.FragmentDiscoveredListBinding
 import com.example.moviesrus.domain.models.Movie
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class DiscoveredListFragment : Fragment() {
     private lateinit var binding: FragmentDiscoveredListBinding
@@ -26,12 +25,28 @@ class DiscoveredListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDiscoveredListBinding.inflate(layoutInflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = args.genre.name
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.genre != null) {
+            args.genre?.let {
+                lifecycleScope.launchWhenStarted {
+                    viewModel.getMoviesByGenre(it.id)
+                }
+                (activity as AppCompatActivity).supportActionBar?.title = it.name
+            }
+        } else {
+            lifecycleScope.launchWhenStarted {
+                viewModel.searchMovie(args.query.toString())
+            }
+            (activity as AppCompatActivity).supportActionBar?.title = args.query
+        }
+
+
 
         lifecycleScope.launchWhenStarted {
             viewModel.movies.collect {
@@ -39,7 +54,6 @@ class DiscoveredListFragment : Fragment() {
                 binding.recyclerviewMovies.adapter = adapter
             }
         }
-
     }
 
     private fun onMovieClicked(movie: Movie) {

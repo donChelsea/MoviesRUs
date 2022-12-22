@@ -21,6 +21,11 @@
         tools:layout="@layout/fragment_discovered_list">
         <argument
             android:name="genre"
-            app:argType="com.example.moviesrus.domain.models.Genre" />
+            app:argType="com.example.moviesrus.domain.models.Genre"
+            app:nullable="true"/>
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 </navigation>
