@@ -21,8 +21,7 @@ class DiscoveredAdapter(
             binding.apply {
                 textviewTitle.text = movie.title
                 textviewReleaseDate.text = movie.releaseDate
-                Picasso.get().load(MOVIE_IMAGE_URL + movie.posterPath).into(imageviewPoster)
-                if (movie.adult) imageAdultIcon.visibility = View.VISIBLE
+                Picasso.get().load(MOVIE_IMAGE_URL + (movie.backdropPath ?: "/zuW6fOiusv4X9nnW3paHGfXcSll.jpg")).into(imageviewBackdrop)
             }
             itemView.setOnClickListener {
                 clickListener(movie)

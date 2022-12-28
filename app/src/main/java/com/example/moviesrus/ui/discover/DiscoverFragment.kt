@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.moviesrus.R
 import com.example.moviesrus.databinding.FragmentDiscoverBinding
 import com.example.moviesrus.domain.models.Genre
@@ -36,7 +37,11 @@ class DiscoverFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.genres.collect { state ->
                 val adapter = GenreAdapter(state.data) { onGenreClicked(it) }
-                binding.recyclerViewGenre.adapter = adapter
+                binding.recyclerViewGenre.apply {
+                    this.adapter = adapter
+                    addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+                }
+
             }
         }
 

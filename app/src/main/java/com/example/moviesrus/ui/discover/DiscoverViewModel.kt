@@ -9,6 +9,7 @@ import com.example.moviesrus.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,11 +27,11 @@ class DiscoverViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         result.data?.let { genres ->
-                            _genres.value = _genres.value.copy(data = genres)
+                            _genres.update { it.copy(data = genres) }
                         }
                     }
                     is Resource.Error -> {
-                        Log.d("DiscoverViewModel: Error: ", result.message.toString())
+                        Log.d("DiscoverViewModel: Error", result.message.toString())
                     }
                     is Resource.Loading -> {
                         _genres.value = _genres.value.copy(isLoading = true)

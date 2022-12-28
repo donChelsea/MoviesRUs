@@ -51,4 +51,15 @@ class MovieRepositoryImpl @Inject constructor(
     }.catch { e ->
         emit(Resource.Error(message = e.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun getMovie(movieId: Int): Flow<Resource<Movie>> = flow {
+        emit(Resource.Loading(isLoading = true))
+
+        val movie = api.getMovie(movieId = movieId)
+        with(movie) {
+            emit(Resource.Success(data = this.toDomain()))
+        }
+    }.catch { e ->
+        emit(Resource.Error(message = e.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

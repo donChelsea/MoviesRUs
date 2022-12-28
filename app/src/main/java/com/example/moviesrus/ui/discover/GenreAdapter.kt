@@ -17,7 +17,7 @@ class GenreAdapter(
     inner class GenreViewHolder(private val binding: ListItemGenreBinding): ViewHolder(binding.root) {
         fun bind(genre: Genre) {
             binding.textviewGenre.text = genre.name
-            Picasso.get().load(GENRE_IMAGE_URL).into(binding.genreIcon)
+            Picasso.get().load(GENRE_IMAGE_URL).into(binding.iconGenre)
             itemView.setOnClickListener {
                 clickListener(genre)
             }

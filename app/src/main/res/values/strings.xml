@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">MoviesRUs</string>
     <string name="discover">Discover</string>
+    <string name="details">Details</string>
+    <string name="play">Play</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="rate">Rate</string>
+    <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="production">Production: %s</string>
+    <plurals name="languages">
+        <item quantity="one">Language: %s</item>
+        <item quantity="other">Languages: %s</item>
+    </plurals>
 </resources>

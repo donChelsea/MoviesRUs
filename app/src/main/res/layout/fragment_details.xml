@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailsFragment">
+
+    <ImageView
+        android:id="@+id/imageview_backdrop"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="@dimen/content_margin_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textview_title"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageview_backdrop"
+        app:layout_constraintTop_toTopOf="@+id/imageview_backdrop"
+        tools:text="Avengers: End Game" />
+
+    <TextView
+        android:id="@+id/textview_year"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_title"
+        app:layout_constraintStart_toStartOf="@+id/textview_title"
+        app:layout_constraintTop_toBottomOf="@+id/textview_title"
+        tools:text="2022" />
+
+    <TextView
+        android:id="@+id/textview_genres"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/textview_year"
+        app:layout_constraintStart_toStartOf="@+id/textview_year"
+        app:layout_constraintTop_toBottomOf="@+id/textview_year"
+        tools:text="Horror, Thriller" />
+
+    <TextView
+        android:id="@+id/textview_runtime"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="1h 42min"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="@+id/textview_genres"
+        app:layout_constraintStart_toStartOf="@+id/textview_genres"
+        app:layout_constraintTop_toBottomOf="@+id/textview_genres" />
+
+    <Button
+        android:id="@+id/button_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/play"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_play_arrow"
+        android:layout_marginHorizontal="@dimen/content_margin_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/imageview_backdrop"/>
+
+    <View
+        android:id="@+id/view_divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="@dimen/content_margin_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/button_play" />
+
+    <include
+        android:id="@+id/movie_detail_options"
+        layout="@layout/movie_detail_options"
+        app:layout_constraintTop_toBottomOf="@id/view_divider_1"
+        android:layout_marginVertical="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/view_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="@dimen/content_margin_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/movie_detail_options" />
+
+    <TextView
+        android:id="@+id/textview_overview_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Overview"
+        app:layout_constraintEnd_toEndOf="@+id/view_divider_2"
+        app:layout_constraintStart_toStartOf="@+id/view_divider_2"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider_2" />
+
+    <TextView
+        android:id="@+id/textview_overview_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/textview_overview_label"
+        app:layout_constraintStart_toStartOf="@+id/textview_overview_label"
+        app:layout_constraintTop_toBottomOf="@+id/textview_overview_label"
+        tools:text="This is very very very long overview text. This is very very very long overview text. This is very very very long overview text." />
+
+    <TextView
+        android:id="@+id/textview_production"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Production: Marvel Studios"
+        app:layout_constraintTop_toBottomOf="@id/textview_overview_text"
+        app:layout_constraintStart_toStartOf="@id/textview_overview_text"
+        app:layout_constraintEnd_toEndOf="@id/textview_overview_text"/>
+
+    <TextView
+        android:id="@+id/textview_languages"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Languages: English"
+        app:layout_constraintTop_toBottomOf="@id/textview_production"
+        app:layout_constraintStart_toStartOf="@id/textview_production"
+        app:layout_constraintEnd_toEndOf="@id/textview_production"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

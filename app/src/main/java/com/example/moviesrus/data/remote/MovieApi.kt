@@ -8,6 +8,7 @@ import com.example.moviesrus.util.API_KEY
 import com.example.moviesrus.util.API_LANGUAGE
 import com.example.moviesrus.util.API_SORT_BY_POPULARITY_DESC
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
@@ -32,5 +33,13 @@ interface MovieApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = API_LANGUAGE,
     ): ListResultDto<MovieDto>
+
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = API_LANGUAGE,
+    ): MovieDto
 
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.moviesrus.databinding.FragmentDiscoveredListBinding
 import com.example.moviesrus.domain.models.Movie
@@ -46,8 +47,6 @@ class DiscoveredListFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = args.query
         }
 
-
-
         lifecycleScope.launchWhenStarted {
             viewModel.movies.collect {
                 val adapter = DiscoveredAdapter(it.data) { movie -> onMovieClicked(movie) }
@@ -57,7 +56,8 @@ class DiscoveredListFragment : Fragment() {
     }
 
     private fun onMovieClicked(movie: Movie) {
-        Log.d("DiscoveredListFragment: ", movie.toString())
+        val action = DiscoveredListFragmentDirections.actionDiscoveredListFragmentToDetailsFragment(movie.id)
+        findNavController().navigate(action)
     }
 
 }
