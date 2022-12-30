@@ -20,7 +20,7 @@ class DiscoveredAdapter(
         fun bind(movie: Movie) {
             binding.apply {
                 textviewTitle.text = movie.title
-                textviewReleaseDate.text = movie.releaseDate
+                textviewReleaseDate.text = movie.releaseDate.substring(0, 4)
                 Picasso.get().load(MOVIE_IMAGE_URL + (movie.backdropPath ?: "/zuW6fOiusv4X9nnW3paHGfXcSll.jpg")).into(imageviewBackdrop)
             }
             itemView.setOnClickListener {

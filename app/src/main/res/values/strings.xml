@@ -8,6 +8,7 @@
     <string name="download">Download</string>
     <string name="share">Share</string>
     <string name="production">Production: %s</string>
+    <string name="released">Released: %s</string>
     <plurals name="languages">
         <item quantity="one">Language: %s</item>
         <item quantity="other">Languages: %s</item>

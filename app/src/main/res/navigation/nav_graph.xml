@@ -39,17 +39,5 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_detailsFragment_to_videoFragment"
-            app:destination="@id/videoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/videoFragment"
-        android:name="com.example.moviesrus.ui.detail.video.VideoFragment"
-        android:label="fragment_video"
-        tools:layout="@layout/fragment_video" >
-        <argument
-            android:name="video"
-            app:argType="com.example.moviesrus.domain.models.Video" />
     </fragment>
 </navigation>

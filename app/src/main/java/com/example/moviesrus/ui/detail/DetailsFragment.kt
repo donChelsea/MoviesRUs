@@ -1,20 +1,22 @@
 package com.example.moviesrus.ui.detail
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.moviesrus.R
 import com.example.moviesrus.databinding.FragmentDetailsBinding
 import com.example.moviesrus.domain.models.Video
 import com.example.moviesrus.util.MOVIE_IMAGE_URL
 import com.example.moviesrus.util.YOUTUBE_API_KEY
+import com.example.moviesrus.util.convertReleasedDate
+import com.example.moviesrus.util.convertRuntime
 import com.google.android.youtube.player.YouTubeStandalonePlayer
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,7 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,8 +45,8 @@ class DetailsFragment : Fragment() {
                 viewModel.movie.collect { state ->
                     state.movie?.let { movie ->
                         textviewTitle.text = movie.title
-                        textviewYear.text = movie.releaseDate
-                        textviewRuntime.text = movie.runtime.toString()
+                        textviewYear.text = getString(R.string.released, convertReleasedDate(movie.releaseDate))
+                        textviewRuntime.text = movie.runtime?.let { convertRuntime(it) }
                         textviewOverviewText.text = movie.overview
                         textviewProduction.text = getString(R.string.production, movie.production?.joinToString(", ") { it.name })
                         textviewLanguages.text = resources.getQuantityString(R.plurals.languages, movie.languages.orEmpty().size, movie.languages?.joinToString(", ") { it.name })
