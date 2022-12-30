@@ -1,9 +1,6 @@
 package com.example.moviesrus.data.remote
 
-import com.example.moviesrus.data.dtos.GenreDto
-import com.example.moviesrus.data.dtos.ListResultDto
-import com.example.moviesrus.data.dtos.ListResultGenreDto
-import com.example.moviesrus.data.dtos.MovieDto
+import com.example.moviesrus.data.dtos.*
 import com.example.moviesrus.util.API_KEY
 import com.example.moviesrus.util.API_LANGUAGE
 import com.example.moviesrus.util.API_SORT_BY_POPULARITY_DESC
@@ -42,4 +39,10 @@ interface MovieApi {
         @Query("language") language: String = API_LANGUAGE,
     ): MovieDto
 
+    @GET("movie/{movie_id}/videos")
+    suspend fun getVideos(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = API_LANGUAGE,
+    ): ListResultDto<VideoDto>
 }

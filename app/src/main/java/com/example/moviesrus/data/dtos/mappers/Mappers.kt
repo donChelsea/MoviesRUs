@@ -1,13 +1,7 @@
 package com.example.moviesrus.data.dtos.mappers
 
-import com.example.moviesrus.data.dtos.GenreDto
-import com.example.moviesrus.data.dtos.LanguageDto
-import com.example.moviesrus.data.dtos.MovieDto
-import com.example.moviesrus.data.dtos.ProductionDto
-import com.example.moviesrus.domain.models.Genre
-import com.example.moviesrus.domain.models.Language
-import com.example.moviesrus.domain.models.Movie
-import com.example.moviesrus.domain.models.Production
+import com.example.moviesrus.data.dtos.*
+import com.example.moviesrus.domain.models.*
 
 fun GenreDto.toDomain() = Genre(
     id = id,
@@ -30,4 +24,10 @@ fun MovieDto.toDomain() = Movie(
     genres = genres?.map { it.toDomain() },
     production = production?.map { it.toDomain() },
     languages = languages?.map { it.toDomain() }
+)
+
+fun VideoDto.toDomain() = Video(
+    key = key,
+    site = site,
+    type = type
 )

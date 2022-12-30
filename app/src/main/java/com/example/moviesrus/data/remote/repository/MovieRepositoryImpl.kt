@@ -4,6 +4,7 @@ import com.example.moviesrus.data.dtos.mappers.toDomain
 import com.example.moviesrus.data.remote.MovieApi
 import com.example.moviesrus.domain.models.Genre
 import com.example.moviesrus.domain.models.Movie
+import com.example.moviesrus.domain.models.Video
 import com.example.moviesrus.domain.repository.MovieRepository
 import com.example.moviesrus.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +25,7 @@ class MovieRepositoryImpl @Inject constructor(
 
         val genres = api.getGenres().genres
         with(genres) {
-            emit(Resource.Success(data = this.map { it.toDomain() }))
+            emit(Resource.Success(data = map { it.toDomain() }))
         }
     }.catch { e ->
         emit(Resource.Error(message = e.message.toString()))
@@ -35,7 +36,7 @@ class MovieRepositoryImpl @Inject constructor(
 
         val genres = api.getMoviesByGenre(genreId = genreId).results
         with(genres) {
-            emit(Resource.Success(data = this.map { it.toDomain() }))
+            emit(Resource.Success(data = map { it.toDomain() }))
         }
     }.catch { e ->
         emit(Resource.Error(message = e.message.toString()))
@@ -46,7 +47,7 @@ class MovieRepositoryImpl @Inject constructor(
 
         val genres = api.searchMovie(query = query).results
         with(genres) {
-            emit(Resource.Success(data = this.map { it.toDomain() }))
+            emit(Resource.Success(data = map { it.toDomain() }))
         }
     }.catch { e ->
         emit(Resource.Error(message = e.message.toString()))
@@ -57,7 +58,18 @@ class MovieRepositoryImpl @Inject constructor(
 
         val movie = api.getMovie(movieId = movieId)
         with(movie) {
-            emit(Resource.Success(data = this.toDomain()))
+            emit(Resource.Success(data = toDomain()))
+        }
+    }.catch { e ->
+        emit(Resource.Error(message = e.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getVideos(movieId: Int): Flow<Resource<List<Video>>> = flow {
+        emit(Resource.Loading(isLoading = true))
+
+        val results = api.getVideos(movieId = movieId).results
+        with(results) {
+            emit(Resource.Success(data = map { it.toDomain() }))
         }
     }.catch { e ->
         emit(Resource.Error(message = e.message.toString()))
